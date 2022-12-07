@@ -17,8 +17,6 @@
 
             var number = Console.ReadLine();
 
-            /*var isNumberRight = double.TryParse(number)*/
-
             if (double.TryParse(number, out rightNumber))
             {
                 PrintMultiplicationTable(rightNumber);
