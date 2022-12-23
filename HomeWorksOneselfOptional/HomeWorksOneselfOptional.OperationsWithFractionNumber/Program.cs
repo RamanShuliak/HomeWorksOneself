@@ -4,9 +4,12 @@
     {
         static void Main(string[] args)
         {
+            Console.WriteLine($"This program take 2 signed fractional numbers and print the results" +
+                $"of their addition, substraction and comparison{Environment.NewLine}");
+
             var numberX = new Number("NumberX", 13945, new ushort[] { 5, 8, 0, 5, 0 });
 
-            var numberY = new Number("NumberY", 1394, new ushort[] { 6, 8, 0, 5, 0 });
+            var numberY = new Number("NumberY", 1394, new ushort[] { 6, 5, 4, 5, 7 });
 
             numberX.PrintNumber();
 
@@ -75,6 +78,11 @@
                     else
                     {
                         fractionalPartResult[i] = (ushort)(firstNumber.FractionalPart[i] - secondNumber.FractionalPart[i] + 10);
+                        if(fractionalPartResult[i - 1] == 0)
+                        {
+                            fractionalPartResult[i - 1] = 9;
+                            fractionalPartResult[i - 2]--;
+                        }
                         fractionalPartResult[i - 1] --;
                     }
                 }
