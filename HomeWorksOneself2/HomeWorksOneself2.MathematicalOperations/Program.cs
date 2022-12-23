@@ -24,7 +24,7 @@
                 switch (selectionInt)
                 {
                     case 1:
-                        GetNumbersByUserAndStartCalculator();
+                        ChekEnteredData();
                         break;
                     case 2:
                         GetNumbersByRandomAndStartCalculator();
@@ -43,7 +43,7 @@
 
         }
 
-        static void SelectMathOperations(int numberX, int numberY)
+        static void SelectMathOperations(int chekedNumberX, int chekedNumberY)
         {
             Console.WriteLine($"Select math operation:{Environment.NewLine}" +
                               $"1. X + Y{Environment.NewLine}" +
@@ -60,35 +60,35 @@
                 switch (selectionInt)
                 {
                     case 1:
-                        Addition(numberX, numberY);
+                        Addition(chekedNumberX, chekedNumberY);
                         break;
                     case 2:
-                        Subtraction(numberX, numberY);
+                        Subtraction(chekedNumberX, chekedNumberY);
                         break;
                     case 3:
-                        Multiplication(numberX, numberY);
+                        Multiplication(chekedNumberX, chekedNumberY);
                         break;
                     case 4:
-                        Dividing(numberX, numberY);
+                        Dividing(chekedNumberX, chekedNumberY);
                         break;
                     case 5:
-                        Rising(numberX, numberY);
+                        Rising(chekedNumberX, chekedNumberY);
                         break;
                     case 6:
-                        Factorial(numberX, numberY);
+                        Factorial(chekedNumberX, chekedNumberY);
                         break;
                     default:
                         Console.WriteLine($"{Environment.NewLine}" +
                                           $"Operation with such number is not found.{Environment.NewLine}" +
                                           $"Try again{Environment.NewLine}");
-                        SelectMathOperations(numberX, numberY);
+                        SelectMathOperations(chekedNumberX, chekedNumberY);
                         break;
                 }
             }
             else
             {
                 Console.WriteLine("Entered data is wrong. Try again.");
-                SelectMathOperations(numberX, numberY);
+                SelectMathOperations(chekedNumberX, chekedNumberY);
             }
         }
 
@@ -116,48 +116,53 @@
 
         //________________________GETTING NUMBERS METHODS___________________________________
 
-        static void GetNumbersByUserAndStartCalculator()
+        static void GetNumbersByRandomAndStartCalculator()
         {
-            Console.WriteLine("Attention! You should enter to the console only integer numbers from" +
-                              "-2,147,483,648 to 2,147,483,647.");
+            var chekedNumberX = GetRandomNumber();
+            var chekedNumberY = GetRandomNumber();
+
+            Console.WriteLine($"Number X = {chekedNumberX}      Number Y = {chekedNumberY}");
+
+            SelectMathOperations(chekedNumberX, chekedNumberY);
+        }
+
+        static string EnterNumber()
+        {
+            var number = Console.ReadLine();
+
+            return number;
+
+        }
+
+        static void ChekEnteredData()
+        {
             Console.WriteLine("Enter number X:");
             var numberX = EnterNumber();
 
             Console.WriteLine("Enter number Y:");
             var numberY = EnterNumber();
 
-            Console.WriteLine($"Number X = {numberX}      Number Y = {numberY}");
-
-            SelectMathOperations(numberX, numberY);
-        }
-
-        static void GetNumbersByRandomAndStartCalculator()
-        {
-            var numberX = GetRandomNumber();
-            var numberY = GetRandomNumber();
-
-            Console.WriteLine($"Number X = {numberX}      Number Y = {numberY}");
-
-            SelectMathOperations(numberX, numberY);
-        }
-
-        static int EnterNumber()
-        {
-            var enterData = Console.ReadLine();
-
-            if (int.TryParse(enterData, out int enterNumber))
+            if (int.TryParse(numberX, out int chekedNumberX) &&
+                int.TryParse(numberY, out int chekedNumberY))
             {
-                return enterNumber;
+
+                GetNumbersByUserAndStartCalculator(chekedNumberX, chekedNumberY);
+
             }
             else
             {
-                Console.WriteLine("Entered data is wrong. You should enter only integer numbers from" +
-                              "-2,147,483,648 to 2,147,483,647.Try again.");
-                EnterNumber();
+                Console.WriteLine("Entered data are wrong. You should to enter " +
+                                  "integer numbers from -2,147,483,648 to 2,147,483,647." +
+                                  "Try again.");
+                ChekEnteredData();
             }
+        }
+        static void GetNumbersByUserAndStartCalculator(int chekedNumberX, int chekedNumberY)
+        {
 
-            return 0;
+            Console.WriteLine($"Number X = {chekedNumberX}      Number Y = {chekedNumberY}");
 
+            SelectMathOperations(chekedNumberX, chekedNumberY);
         }
 
         static int GetRandomNumber()
@@ -171,40 +176,40 @@
 
         //________________________MATH OPERATIONS METHODS___________________________________
 
-        static void Addition(int numberX, int numberY)
+        static void Addition(int chekedNumberX, int chekedNumberY)
         {
-            var numberA = (long)numberX + numberY;
+            var numberA = (long)chekedNumberX + chekedNumberY;
             Console.WriteLine($"X + Y = {numberA}");
 
             ContinueOrNot();
         }
 
-        static void Subtraction(int numberX, int numberY)
+        static void Subtraction(int chekedNumberX, int chekedNumberY)
         {
-            Console.WriteLine($"X - Y = {numberX - numberY}");
+            Console.WriteLine($"X - Y = {chekedNumberX - chekedNumberY}");
 
             ContinueOrNot();
         }
 
-        static void Multiplication(int numberX, int numberY)
+        static void Multiplication(int chekedNumberX, int chekedNumberY)
         {
-            var numberA = (long)numberX * numberY;
+            var numberA = (long)chekedNumberX * chekedNumberY;
             Console.WriteLine($"X * Y = {numberA}");
 
             ContinueOrNot();
         }
 
-        static void Dividing(int numberX, int numberY)
+        static void Dividing(int chekedNumberX, int chekedNumberY)
         {
-            var numberA = (double)numberX / numberY;
+            var numberA = (double)chekedNumberX / chekedNumberY;
             Console.WriteLine($"X / Y = {numberA}");
 
             ContinueOrNot();
         }
 
-        static void Rising(int numberX, int numberY)
+        static void Rising(int chekedNumberX, int chekedNumberY)
         {
-            var numberA = Math.Pow(numberX, numberY);
+            var numberA = Math.Pow(chekedNumberX, chekedNumberY);
 
             if (numberA <= double.MaxValue)
             {
@@ -219,16 +224,16 @@
             ContinueOrNot();
         }
 
-        static void Factorial(int numberX, int numberY)
+        static void Factorial(int chekedNumberX, int chekedNumberY)
         {
             long factorialX = 1;
-            for (int i = 1; i <= numberX; i++)
+            for (int i = 1; i <= chekedNumberX; i++)
             {
                 factorialX *= i;
             }
 
             long factorialY = 1;
-            for (int x = 1; x <= numberY; x++)
+            for (int x = 1; x <= chekedNumberY; x++)
             {
                 factorialY *= x;
             }
