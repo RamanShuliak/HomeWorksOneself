@@ -4,9 +4,9 @@
     {
         static void Main(string[] args)
         {
-            var numberX = new Number("NumberX", 13945, new ushort[] { 5, 8, 0, 5, 1 });
+            var numberX = new Number("NumberX", 13945, new ushort[] { 5, 8, 0, 5, 0 });
 
-            var numberY = new Number("NumberY", 6345, new ushort[] { 7, 4, 3, 9, 0 });
+            var numberY = new Number("NumberY", 1394, new ushort[] { 6, 8, 0, 5, 0 });
 
             numberX.PrintNumber();
 
@@ -14,15 +14,9 @@
 
             Addition(numberX, numberY);
 
-            numberX.PrintNumber();
-
-            numberY.PrintNumber();
-
             Subtraction(numberX, numberY);
 
-            numberX.PrintNumber();
-
-            numberY.PrintNumber();
+            СomparisonOfNumbers(numberX, numberY);
         }
 
         static void Addition(Number firstNumber, Number secondNumber)
@@ -92,6 +86,40 @@
             var resultOfSubstraction = new Number("ResultOfSubstraction", integerPartResult, fractionalPartResult);
 
             resultOfSubstraction.PrintNumber();
+
+        }
+
+        static void СomparisonOfNumbers(Number firstNumber, Number secondNumber)
+        {
+           if(firstNumber.IntegerPart > secondNumber.IntegerPart)
+           {
+               Console.WriteLine($"{firstNumber.Name} > {secondNumber.Name}");
+           }
+           else if (firstNumber.IntegerPart < secondNumber.IntegerPart)
+           {
+               Console.WriteLine($"{firstNumber.Name} < {secondNumber.Name}");
+           }
+           else
+           {
+              for(var i = 0; i < firstNumber.FractionalPart.Length; i++)
+                {
+                    if (firstNumber.FractionalPart[i] > secondNumber.FractionalPart[i])
+                    {
+                        Console.WriteLine($"{firstNumber.Name} > {secondNumber.Name}");
+                        break;
+                    }
+                    else if(firstNumber.FractionalPart[i] < secondNumber.FractionalPart[i])
+                    {
+                        Console.WriteLine($"{firstNumber.Name} < {secondNumber.Name}");
+                        break;
+                    }
+                    else if(firstNumber.FractionalPart[firstNumber.FractionalPart.Length-1] == secondNumber.FractionalPart[secondNumber.FractionalPart.Length - 1])
+                    {
+                        Console.WriteLine($"{firstNumber.Name} = {secondNumber.Name}");
+                        break;
+                    }
+                } 
+           }
 
         }
     }
