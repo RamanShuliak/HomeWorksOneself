@@ -9,7 +9,7 @@ namespace HomeWorksOneself3.FantasyArmy
     public abstract class Unit : GameObject, IFight
     {
         public string Side { get; set; }
-        public int Damage { get; set; }
+        public double Damage { get; set; }
         public string TypeOfDamage { get; set; }
 
         public void Fight(Unit attacker, GameObject target)
