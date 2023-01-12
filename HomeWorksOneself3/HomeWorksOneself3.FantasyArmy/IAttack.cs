@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HomeWorksOneself3.FantasyArmy.Units;
 
 namespace HomeWorksOneself3.FantasyArmy
 {
-    public interface IFight
+    public interface IAttack
     {
-        void Fight(Unit attacker, GameObject target);
+        void Attack (Unit attacker, GameObject target);
     }
 }

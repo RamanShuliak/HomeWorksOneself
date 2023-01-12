@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HomeWorksOneself3.FantasyArmy.Units;
 
 namespace HomeWorksOneself3.FantasyArmy
 {
@@ -52,7 +53,8 @@ namespace HomeWorksOneself3.FantasyArmy
             }
             else
             {
-                Console.WriteLine($"{target.Name} was damaged by {resultDamage} points.");
+                Console.WriteLine($"{target.Name} was damaged by {resultDamage} points.{Environment.NewLine}" +
+                    $"{target.Name}'s health = {target.HealthPoints}.");
             }
 
         }
