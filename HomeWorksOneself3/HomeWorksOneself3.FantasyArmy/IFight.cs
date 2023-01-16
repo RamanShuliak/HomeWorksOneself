@@ -1,14 +1,14 @@
-﻿using System;
+﻿using HomeWorksOneself3.FantasyArmy.Units;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HomeWorksOneself3.FantasyArmy.Units;
 
 namespace HomeWorksOneself3.FantasyArmy
 {
-    public interface IAttack
+    public interface IFight
     {
-        void Attack (GameObject target);
+        void Fight(Unit opponent);
     }
 }
