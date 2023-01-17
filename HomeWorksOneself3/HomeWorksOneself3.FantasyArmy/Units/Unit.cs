@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace HomeWorksOneself3.FantasyArmy.Units
 {
-    public abstract class Unit : GameObject, IAttack, IFight
+    public abstract class Unit : GameObject, IAttack, IFight, ILucky
     {
         public string Side { get; set; }
         public double Damage { get; set; }
         public string TypeOfDamage { get; set; }
-        public bool Luck { get; set; }
+        public int Luck { get; set; }
 
         public virtual void Attack (GameObject target)
         {
@@ -20,11 +20,11 @@ namespace HomeWorksOneself3.FantasyArmy.Units
                 var newTarget = (Unit)target;
                 if (Side == newTarget.Side && Side == "Light")
                 {
-                    Console.WriteLine($"Light characters can't fight between themselves," +
-                        $"and {Name} with {target.Name} go to tavern and drink together.");
+                    Console.WriteLine($"Light characters can't fight between themselves.{Environment.NewLine}" +
+                        $"{Name} with {target.Name} desided, that they don't wants to kill each other " +
+                        $"and go to tavern to drink  beer together.");
                 }
             }
-            Console.WriteLine($"{Name} attack {target.Name}.");
 
             var resultDamage = 0.0;
 
@@ -42,6 +42,10 @@ namespace HomeWorksOneself3.FantasyArmy.Units
             {
                 resultDamage = Damage - target.Armor;
             }
+
+            var luckInAttack = CalculateLuck();
+
+            resultDamage *= luckInAttack;
 
             target.GetDamage(resultDamage);
         }
@@ -65,6 +69,17 @@ namespace HomeWorksOneself3.FantasyArmy.Units
                 Console.WriteLine($"{Name} won the {opponent.Name} in fight.{Environment.NewLine}" +
                     $"{opponent.Name}'s body was thrown to the crows.");
             }
+        }
+
+        public double CalculateLuck()
+        {
+            var random = new Random();
+
+            var univerceLuck = random.Next(0, 100);
+
+            var resultLuck = (double)(((Luck + univerceLuck)/2)/100);
+
+            return resultLuck;
         }
     }
 }

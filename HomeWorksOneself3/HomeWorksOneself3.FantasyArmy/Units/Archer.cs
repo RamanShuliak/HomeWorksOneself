@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace HomeWorksOneself3.FantasyArmy.Units
 {
-    public class Swordsman : Unit
+    public class Archer : Unit
     {
-        public int Stamina { get; set; }
+        public int AmountOfArrows { get; set; }
 
-        public Swordsman()
+        public Archer()
         {
         }
 
-        public Swordsman(string name, bool isAlive, double healthPoints, 
-            double cost, double armor, string typeOfArmor, 
-            string side, double damage, string typeOfDamage, 
-            int luck, int stamina)
+        public Archer(string name, bool isAlive, double healthPoints,
+            double cost, double armor, string typeOfArmor,
+            string side, double damage, string typeOfDamage,
+            int luck, int amountOfArrows)
         {
             Name = name;
             IsAlive = isAlive;
@@ -29,7 +29,7 @@ namespace HomeWorksOneself3.FantasyArmy.Units
             Damage = damage;
             TypeOfDamage = typeOfDamage;
             Luck = luck;
-            Stamina = stamina;
+            AmountOfArrows = amountOfArrows;
         }
     }
 }
