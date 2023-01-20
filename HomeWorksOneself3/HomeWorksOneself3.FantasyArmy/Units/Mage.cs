@@ -34,5 +34,28 @@ namespace HomeWorksOneself3.FantasyArmy.Units
             Luck = luck;
             Mana = mana;
         }
+
+        public override void Attack(GameObject target)
+        {
+            var costOfSpell = 25;
+            if (Mana <= 0)
+            {
+                Mana = 0;
+
+                Console.WriteLine($"Without mana {Name} can't use the spells, " +
+                    $"and will be fight like a simple man and can use only physical weapon.");
+
+                TypeOfArmor = "Physical";
+                TypeOfDamage = "Physical";
+            }
+            base.Attack(target);
+
+            Mana -= costOfSpell;
+        }
+
+        public override void GetDamage(double damage)
+        {
+            base.GetDamage(damage);
+        }
     }
 }

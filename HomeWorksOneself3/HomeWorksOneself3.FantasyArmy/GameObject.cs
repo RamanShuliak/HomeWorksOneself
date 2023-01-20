@@ -17,9 +17,16 @@ namespace HomeWorksOneself3.FantasyArmy
         public double Armor { get; set; }
         public string TypeOfArmor { get; set; }
 
-        public void GetDamage(double damage)
+        public virtual void GetDamage(double damage)
         {
+            if(damage < 0)
+            {
+                damage = 0;
+            }
+
             HealthPoints -= damage;
+
+            Armor *= 0.85;
 
             if (HealthPoints <= 0)
             {

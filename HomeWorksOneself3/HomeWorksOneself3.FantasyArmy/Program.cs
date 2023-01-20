@@ -17,7 +17,7 @@ namespace HomeWorksOneself3.FantasyArmy
                 Armor = 45,
                 TypeOfArmor = "Magic",
                 Side = "Light",
-                Damage = 70,
+                Damage = 100,
                 TypeOfDamage = "Magic",
                 Luck = 40,
                 Mana = 100
@@ -32,13 +32,28 @@ namespace HomeWorksOneself3.FantasyArmy
                 Armor = 70,
                 TypeOfArmor = "Physical",
                 Side = "Dark",
-                Damage = 100,
+                Damage = 80,
                 TypeOfDamage = "Physical",
                 Luck = 50,
                 Stamina = 80
             };
 
-            swordsman.Fight(mage);
+            var archer = new Archer()
+            {
+                Name = "Archer Legolas",
+                IsAlive = true,
+                HealthPoints = 80.0,
+                Cost = 200,
+                Armor = 55,
+                TypeOfArmor = "Physical",
+                Side = "Neutral",
+                Damage = 90,
+                TypeOfDamage = "Physical",
+                Luck = 55,
+                AmountOfArrows = 15
+            };
+
+            archer.Fight(swordsman);
         }
     }
 }

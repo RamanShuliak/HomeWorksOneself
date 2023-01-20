@@ -15,17 +15,6 @@ namespace HomeWorksOneself3.FantasyArmy.Units
 
         public virtual void Attack (GameObject target)
         {
-            if (target is Unit)
-            {
-                var newTarget = (Unit)target;
-                if (Side == newTarget.Side && Side == "Light")
-                {
-                    Console.WriteLine($"Light characters can't fight between themselves.{Environment.NewLine}" +
-                        $"{Name} with {target.Name} desided, that they don't wants to kill each other " +
-                        $"and go to tavern to drink  beer together.");
-                }
-            }
-
             var resultDamage = 0.0;
 
             if (TypeOfDamage == "Physical" && target.TypeOfArmor == "Magic")
@@ -54,9 +43,27 @@ namespace HomeWorksOneself3.FantasyArmy.Units
         {
             while(IsAlive == true && opponent.IsAlive == true)
             {
-                Attack(opponent);
+                if (Side == opponent.Side && Side == "Light")
+                {
+                    Console.WriteLine($"Light characters can't fight between themselves.{Environment.NewLine}" +
+                        $"{Name} with {opponent.Name} desided, that they don't wants to kill each other " +
+                        $"and go to tavern to drink  beer together.");
 
-                opponent.Attack(this);
+                    break;
+                }
+                else
+                {
+                    Attack(opponent);
+
+                    if (opponent.IsAlive == true)
+                    {
+                        opponent.Attack(this);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
             }
 
             if(IsAlive == false)
@@ -77,7 +84,7 @@ namespace HomeWorksOneself3.FantasyArmy.Units
 
             var univerceLuck = random.Next(0, 100);
 
-            var resultLuck = (double)(((Luck + univerceLuck)/2)/100);
+            var resultLuck = ((double)((Luck + univerceLuck)/2)/100);
 
             return resultLuck;
         }
