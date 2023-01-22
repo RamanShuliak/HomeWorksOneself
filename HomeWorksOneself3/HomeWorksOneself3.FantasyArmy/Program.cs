@@ -27,33 +27,18 @@ namespace HomeWorksOneself3.FantasyArmy
             {
                 Name = "Swordsman Magnus",
                 IsAlive = true,
-                HealthPoints = 100.0,
+                HealthPoints = 150.0,
                 Cost = 150,
-                Armor = 70,
+                Armor = 100,
                 TypeOfArmor = "Physical",
                 Side = "Dark",
-                Damage = 80,
+                Damage = 120,
                 TypeOfDamage = "Physical",
                 Luck = 50,
                 Stamina = 80
             };
 
-            var archer = new Archer()
-            {
-                Name = "Archer Legolas",
-                IsAlive = true,
-                HealthPoints = 80.0,
-                Cost = 200,
-                Armor = 55,
-                TypeOfArmor = "Physical",
-                Side = "Neutral",
-                Damage = 90,
-                TypeOfDamage = "Physical",
-                Luck = 55,
-                AmountOfArrows = 15
-            };
-
-            archer.Fight(swordsman);
+            mage.Fight(swordsman);
         }
     }
 }
