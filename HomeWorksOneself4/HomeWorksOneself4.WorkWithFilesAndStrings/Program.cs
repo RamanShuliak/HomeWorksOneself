@@ -11,6 +11,8 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
             var parsingMethods = new ParsingMethods();
 
             parsingMethods.ParsingForSentences(filePath);
+
+            parsingMethods.ParsingForWords(filePath);
         }
     }
 }

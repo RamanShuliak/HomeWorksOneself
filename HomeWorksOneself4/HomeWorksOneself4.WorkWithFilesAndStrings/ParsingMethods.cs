@@ -31,11 +31,44 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
 
                             numberOfSentences++;
                         }
-
                     }
                 }
 
                 Console.WriteLine($"Number of sentences in text = {numberOfSentences}");
+            }
+        }
+
+        public void ParsingForWords(string filePath)
+        {
+            using(var reader = new StreamReader(filePath, Encoding.UTF8))
+            {
+                var newText = File.CreateText(@"D:\Programming\Repository\HomeWorksOneself\HomeWorksOneself4\WorkingFiles\Words.txt");
+
+                var originalText = reader.ReadToEnd();
+
+                var words = originalText.Split(" ");
+
+                var symbolsForReplacing = new[] { ".", "\"", ",", "!", "?", "'", "-"};
+
+                var numberOfWords = 0;
+
+                foreach(var word in words)
+                {
+                    var cleanWord = "";
+                    foreach(var symbol in symbolsForReplacing)
+                    {
+                        cleanWord = word.Replace(symbol, "");
+                    }
+
+                    var newWord = cleanWord.ToUpperInvariant();
+
+                    newText.WriteLine(newWord);
+
+                    numberOfWords++;
+                }
+
+                Console.WriteLine($"Number of words in text = {numberOfWords}");
+
             }
         }
     }
