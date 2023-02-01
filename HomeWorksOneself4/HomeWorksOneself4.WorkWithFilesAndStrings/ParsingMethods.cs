@@ -14,7 +14,7 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
 
             using(var reader = new StreamReader(filePath, Encoding.UTF8))
             {
-                var text = File.CreateText(@"D:\Programming\Repository\HomeWorksOneself\HomeWorksOneself4\WorkingFiles\Sentences.txt");
+                var text = File.CreateText(@"D:\Programming\Repository\HomeWorksOneself\HomeWorksOneself4\WorkingFiles\AllSentences.txt");
 
                 var numberOfSentences = 0;
 
@@ -30,7 +30,7 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
                     {
                         if (sentence.Length >= 2)
                         {
-                            text.WriteLine($"New sentence - {sentence}");
+                            text.WriteLine($"Sentence - {sentence}");
 
                             numberOfSentences++;
                         }
@@ -47,14 +47,15 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
         {
             using(var reader = new StreamReader(filePath, Encoding.UTF8))
             {
-                var newText = File.CreateText(@"D:\Programming\Repository\HomeWorksOneself\HomeWorksOneself4\WorkingFiles\Words.txt");
+                var newText = File.CreateText(@"D:\Programming\Repository\HomeWorksOneself\HomeWorksOneself4\WorkingFiles\AllWords.txt");
 
                 var symbolsForSpleating = new[] { ".", "\"", ",", "!", "?", "'",
                     "-", " ", "", ":", "\t", "\n", ";", "1", "2", "3", "4", "5",
                     "6", "7", "8", "9", "0", "(", ")", "$", "_", "/", ">", "<",
                     "[", "]", "|", "*", "#", "&", "+", "%", "=", "~"};
 
-                // 
+                // I try to devide text for words by using Regexes [^(A-za-z)] and [^(\w)]
+                // but it's didn't bring neded result.
 
                 var words = new List<string>();
 
@@ -82,6 +83,32 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
 
                 return words;
 
+            }
+        }
+
+        public void ParsingForPunctuationMarks(string filePath)
+        {
+            using(var reader = new StreamReader(filePath, Encoding.UTF8))
+            {
+                var newText = File.CreateText(@"D:\Programming\Repository\HomeWorksOneself\HomeWorksOneself4\WorkingFiles\AllPunctuationMarks.txt");
+
+                var numberOfMarks = 0;
+
+                while (!reader.EndOfStream)
+                {
+                    var originalText = reader.ReadToEnd();
+
+                    var marks = originalText.Where(c => char.IsPunctuation(c)).ToList();
+
+                    foreach(var mark in marks)
+                    {
+                        newText.WriteLine(mark);
+
+                        numberOfMarks++;
+                    }
+                }
+
+                Console.WriteLine($"Number of punctuation marks in text = {numberOfMarks}");
             }
         }
     }

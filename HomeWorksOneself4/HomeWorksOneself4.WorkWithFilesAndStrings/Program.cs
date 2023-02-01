@@ -13,6 +13,8 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
             parsingMethods.ParsingForSentences(filePath);
 
             parsingMethods.ParsingForWords(filePath);
+
+            parsingMethods.ParsingForPunctuationMarks(filePath);
         }
     }
 }
