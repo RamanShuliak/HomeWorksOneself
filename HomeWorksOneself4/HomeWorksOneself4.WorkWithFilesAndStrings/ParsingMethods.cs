@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace HomeWorksOneself4.WorkWithFilesAndStrings
 {
     public class ParsingMethods
     {
-        public void ParsingForSentences(string filePath)
+        public List<string> ParsingForSentences(string filePath)
         {
 
             using(var reader = new StreamReader(filePath, Encoding.UTF8))
@@ -17,11 +18,13 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
 
                 var numberOfSentences = 0;
 
-                while(!reader.EndOfStream)
+                var sentences = new List<string>();
+
+                while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
-
-                    var sentences = line.Split('.', '!', '?');
+                    
+                    sentences = line.Split('.', '!', '?').ToList();
 
                     foreach(var sentence in sentences)
                     {
@@ -35,39 +38,49 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
                 }
 
                 Console.WriteLine($"Number of sentences in text = {numberOfSentences}");
+
+                return sentences;
             }
         }
 
-        public void ParsingForWords(string filePath)
+        public List<string> ParsingForWords(string filePath)
         {
             using(var reader = new StreamReader(filePath, Encoding.UTF8))
             {
                 var newText = File.CreateText(@"D:\Programming\Repository\HomeWorksOneself\HomeWorksOneself4\WorkingFiles\Words.txt");
 
-                var originalText = reader.ReadToEnd();
+                var symbolsForSpleating = new[] { ".", "\"", ",", "!", "?", "'",
+                    "-", " ", "", ":", "\t", "\n", ";", "1", "2", "3", "4", "5",
+                    "6", "7", "8", "9", "0", "(", ")", "$", "_", "/", ">", "<",
+                    "[", "]", "|", "*", "#", "&", "+", "%", "=", "~"};
 
-                var words = originalText.Split(" ");
+                // 
 
-                var symbolsForReplacing = new[] { ".", "\"", ",", "!", "?", "'", "-"};
+                var words = new List<string>();
 
                 var numberOfWords = 0;
 
-                foreach(var word in words)
+                while (!reader.EndOfStream)
                 {
-                    var cleanWord = "";
-                    foreach(var symbol in symbolsForReplacing)
+                    var originalText = reader.ReadToEnd();
+
+                    words = originalText.Split(symbolsForSpleating, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+                    words.Sort();
+
+                    foreach (var word in words)
                     {
-                        cleanWord = word.Replace(symbol, "");
+                        var newWord = word.ToUpperInvariant();
+
+                        newText.WriteLine(newWord);
+
+                        numberOfWords++;
                     }
-
-                    var newWord = cleanWord.ToUpperInvariant();
-
-                    newText.WriteLine(newWord);
-
-                    numberOfWords++;
                 }
 
                 Console.WriteLine($"Number of words in text = {numberOfWords}");
+
+                return words;
 
             }
         }
