@@ -54,7 +54,8 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
                     "6", "7", "8", "9", "0", "(", ")", "$", "_", "/", ">", "<",
                     "[", "]", "|", "*", "#", "&", "+", "%", "=", "~"};
 
-                // I try to devide text for words by using Regexes [^(A-za-z)] and [^(\w)]
+                // I try to devide given by teacher text for words
+                // by using Regexes [^(A-za-z)] and [^(\w)]
                 // but it's didn't bring neded result.
 
                 var words = new List<string>();
