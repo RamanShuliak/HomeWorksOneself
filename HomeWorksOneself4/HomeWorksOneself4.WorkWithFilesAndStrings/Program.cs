@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics.Tracing;
+using System.Text;
 namespace HomeWorksOneself4.WorkWithFilesAndStrings
 {
     internal class Program
@@ -12,9 +13,14 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
 
             parsingMethods.ParsingForSentences(filePath);
 
-            parsingMethods.ParsingForWords(filePath);
+            var words = parsingMethods.ParsingForWords(filePath);
 
             parsingMethods.ParsingForPunctuationMarks(filePath);
+
+
+            var searchingMethods = new SearchingMethods();
+
+            searchingMethods.PrintWordsListWithAmounts(words);
         }
     }
 }

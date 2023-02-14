@@ -9,7 +9,7 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
 {
     public class ParsingMethods
     {
-        public List<string> ParsingForSentences(string filePath)
+        public void ParsingForSentences(string filePath)
         {
 
             using(var reader = new StreamReader(filePath, Encoding.UTF8))
@@ -28,19 +28,17 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
 
                     foreach(var sentence in sentences)
                     {
-                        if (sentence.Length >= 2)
-                        {
                             text.WriteLine($"Sentence - {sentence}");
 
                             numberOfSentences++;
-                        }
                     }
                 }
 
                 Console.WriteLine($"Number of sentences in text = {numberOfSentences}");
 
-                return sentences;
+                text.Close();
             }
+
         }
 
         public List<string> ParsingForWords(string filePath)
@@ -60,6 +58,8 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
 
                 var words = new List<string>();
 
+                var newWords = new List<string>();
+
                 var numberOfWords = 0;
 
                 while (!reader.EndOfStream)
@@ -74,6 +74,8 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
                     {
                         var newWord = word.ToUpperInvariant();
 
+                        newWords.Add(newWord);
+
                         newText.WriteLine(newWord);
 
                         numberOfWords++;
@@ -82,8 +84,9 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
 
                 Console.WriteLine($"Number of words in text = {numberOfWords}");
 
-                return words;
+                newText.Close();
 
+                return newWords;
             }
         }
 
