@@ -20,15 +20,36 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
 
                 var sentences = new List<string>();
 
+                var symbolsForSpleating = new string[] 
+                { 
+                    ". ", 
+                    "? ", 
+                    "! ",
+                    "\n", 
+                    "\" ",
+                    ".\n",
+                    "?\n",
+                    "!\n",
+                    "...",
+                    "?!",
+                    "?..",
+                    "!.."
+                };
+
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
-                    
-                    sentences = line.Split('.', '!', '?').ToList();
 
-                    foreach(var sentence in sentences)
+                    sentences = line
+                        .Split(symbolsForSpleating, StringSplitOptions.RemoveEmptyEntries)
+                        .Where(s => s != null || s.Count() != 0)
+                        .Select(s => s)
+                        .ToList();
+
+
+                    foreach (var sentence in sentences)
                     {
-                            text.WriteLine($"Sentence - {sentence}");
+                            text.WriteLine($"* - {sentence}");
 
                             numberOfSentences++;
                     }
@@ -58,29 +79,20 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
 
                 var words = new List<string>();
 
-                var newWords = new List<string>();
-
                 while (!reader.EndOfStream)
                 {
                     var originalText = reader.ReadToEnd();
 
                     words = originalText
                         .Split(symbolsForSpleating, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(w => w.ToUpperInvariant())
+                        .OrderBy(w => w)
                         .ToList();
 
-                    words.Where(w => w.ToUpperInvariant().)
-                    /*words.Sort();
-
-                    foreach (var word in words)
+                    foreach(var word in words)
                     {
-                        var newWord = word.ToUpperInvariant();
-
-                        newWords.Add(newWord);
-
-                        newText.WriteLine(newWord);
-
-                        numberOfWords++;
-                    }*/
+                        newText.WriteLine(word);
+                    }
                 }
                 var numberOfWords = words.Count();
 
@@ -88,7 +100,7 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
 
                 newText.Close();
 
-                return newWords;
+                return words;
             }
         }
 
