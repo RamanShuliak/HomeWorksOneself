@@ -60,15 +60,16 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
 
                 var newWords = new List<string>();
 
-                var numberOfWords = 0;
-
                 while (!reader.EndOfStream)
                 {
                     var originalText = reader.ReadToEnd();
 
-                    words = originalText.Split(symbolsForSpleating, StringSplitOptions.RemoveEmptyEntries).ToList();
+                    words = originalText
+                        .Split(symbolsForSpleating, StringSplitOptions.RemoveEmptyEntries)
+                        .ToList();
 
-                    words.Sort();
+                    words.Where(w => w.ToUpperInvariant().)
+                    /*words.Sort();
 
                     foreach (var word in words)
                     {
@@ -79,8 +80,9 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
                         newText.WriteLine(newWord);
 
                         numberOfWords++;
-                    }
+                    }*/
                 }
+                var numberOfWords = words.Count();
 
                 Console.WriteLine($"Number of words in text = {numberOfWords}");
 
