@@ -9,7 +9,7 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
 {
     public class ParsingMethods
     {
-        public void ParsingForSentences(string filePath)
+        public List<string> ParsingForSentences(string filePath)
         {
 
             using(var reader = new StreamReader(filePath, Encoding.UTF8))
@@ -38,9 +38,9 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
 
                 while (!reader.EndOfStream)
                 {
-                    var line = reader.ReadLine();
+                    var allText = reader.ReadToEnd();
 
-                    sentences = line
+                    sentences = allText
                         .Split(symbolsForSpleating, StringSplitOptions.RemoveEmptyEntries)
                         .Where(s => s != null || s.Count() != 0)
                         .Select(s => s)
@@ -58,6 +58,8 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
                 Console.WriteLine($"Number of sentences in text = {numberOfSentences}");
 
                 text.Close();
+
+                return sentences;
             }
 
         }

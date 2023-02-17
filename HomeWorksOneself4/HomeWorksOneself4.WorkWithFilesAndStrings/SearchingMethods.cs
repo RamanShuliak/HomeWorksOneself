@@ -11,8 +11,6 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
         public void PrintWordsListWithAmounts(List<string> words)
         {
 
-            using (var writer = new StringWriter())
-            {
                 var newWordsText = File.CreateText(@"D:\Programming\Repository\HomeWorksOneself\HomeWorksOneself4\WorkingFiles\WordsAndAmounts.txt");
 
                 var resultWords = words.GroupBy(w => w)
@@ -24,7 +22,18 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
                 {
                     newWordsText.WriteLine($"{word.Word} - {word.Amount}");
                 }
-            }
+        }
+
+        public void FindMaxBySymbolsSentence(List<string> sentences)
+        {
+                var sentencesResultText = File.CreateText(@"D:\Programming\Repository\HomeWorksOneself\HomeWorksOneself4\WorkingFiles\SentencesResultText.txt");
+
+                var maxBySymbolsSentence = sentences
+                    .OrderByDescending(w => w.Count())
+                    .FirstOrDefault();
+
+                sentencesResultText.Write(maxBySymbolsSentence);
+
         }
     }
 }

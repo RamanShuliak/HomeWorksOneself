@@ -11,7 +11,7 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
 
             var parsingMethods = new ParsingMethods();
 
-            parsingMethods.ParsingForSentences(filePath);
+            var sentences = parsingMethods.ParsingForSentences(filePath);
 
             var words = parsingMethods.ParsingForWords(filePath);
 
@@ -21,6 +21,8 @@ namespace HomeWorksOneself4.WorkWithFilesAndStrings
             var searchingMethods = new SearchingMethods();
 
             searchingMethods.PrintWordsListWithAmounts(words);
+
+            searchingMethods.FindMaxBySymbolsSentence(sentences);
         }
     }
 }
